@@ -1,0 +1,115 @@
+# PC VIRTUAL SIMPLES
+# Salve como: pc_virtual.py
+# Execute com: python pc_virtual.py
+
+import os
+import platform
+from datetime import datetime
+
+memoria = {}
+arquivos = {}
+
+def limpar():
+    os.system("cls" if platform.system() == "Windows" else "clear")
+
+def ajuda():
+    print("""
+Comandos disponíveis:
+
+  help       - Mostra esta ajuda
+  clear      - Limpa a tela
+  about      - Informações do PC virtual
+  time       - Mostra a hora
+  mem        - Mostra a memória
+  ls         - Lista arquivos
+  write      - Cria um arquivo
+  read       - Lê um arquivo
+  delete     - Apaga um arquivo
+  shutdown   - Desliga o PC virtual
+""")
+
+def iniciar():
+    limpar()
+
+    print("======================================")
+    print("          MEU PC VIRTUAL")
+    print("======================================")
+    print("Inicializando...")
+    print("CPU: Virtual CPU")
+    print("RAM: 512 MB")
+    print("Disco: 10 GB")
+    print("Sistema: VirtualOS 1.0")
+    print("--------------------------------------")
+    print("Digite 'help' para ver os comandos.")
+
+    while True:
+        comando = input("\nVirtualPC> ").strip()
+
+        if comando == "help":
+            ajuda()
+
+        elif comando == "clear":
+            limpar()
+
+        elif comando == "about":
+            print("\nVirtualOS 1.0")
+            print("CPU: Virtual CPU")
+            print("RAM: 512 MB")
+            print("Disco virtual: 10 GB")
+
+        elif comando == "time":
+            print("\nHora:", datetime.now().strftime("%H:%M:%S"))
+
+        elif comando == "mem":
+            print("\nMemória virtual:")
+            if memoria:
+                for chave, valor in memoria.items():
+                    print(f"{chave} = {valor}")
+            else:
+                print("Memória vazia.")
+
+        elif comando == "ls":
+            print("\nArquivos:")
+            if arquivos:
+                for nome in arquivos:
+                    print("-", nome)
+            else:
+                print("Nenhum arquivo.")
+
+        elif comando == "write":
+            nome = input("Nome do arquivo: ")
+            texto = input("Conteúdo: ")
+            arquivos[nome] = texto
+            print("Arquivo criado!")
+
+        elif comando == "read":
+            nome = input("Nome do arquivo: ")
+
+            if nome in arquivos:
+                print("\n" + arquivos[nome])
+            else:
+                print("Arquivo não encontrado.")
+
+        elif comando == "delete":
+            nome = input("Nome do arquivo: ")
+
+            if nome in arquivos:
+                del arquivos[nome]
+                print("Arquivo apagado!")
+            else:
+                print("Arquivo não encontrado.")
+
+        elif comando == "shutdown":
+            print("\nDesligando o PC virtual...")
+            break
+
+        elif comando == "":
+            continue
+
+        else:
+            print("Comando não encontrado.")
+            print("Digite 'help' para ver os comandos.")
+
+
+if __name__ == "__main__":
+    iniciar()
