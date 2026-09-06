@@ -1,6 +1,4 @@
-# PC VIRTUAL SIMPLES
-# Salve como: pc_virtual.py
-# Execute com: python pc_virtual.py
+
 
 import os
 import platform
